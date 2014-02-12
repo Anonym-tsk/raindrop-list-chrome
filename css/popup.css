@@ -1,0 +1,125 @@
+html, body {
+  width: 640px;
+  height: 400px; }
+
+body {
+  font-size: 13px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none;
+  color: #393939;
+  margin: 0;
+  background: #f3f3f3; }
+
+::-webkit-scrollbar {
+  width: 4px; }
+
+::-webkit-scrollbar-track {
+  background: #eeeeee; }
+
+::-webkit-scrollbar-thumb {
+  background: #d1d1d1;
+  border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b8b8b8; }
+
+#wrapper {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  position: relative; }
+
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+  line-height: 1.3em; }
+
+.nowrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+#collections {
+  float: left;
+  display: block;
+  list-style: none;
+  border-right: 1px dashed #cfcfcf;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  height: 100%;
+  overflow: auto; }
+  #collections .collection {
+    min-height: 48px;
+    padding: 7px 10px;
+    -webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+    cursor: pointer; }
+    #collections .collection:hover {
+      background-color: #ebebeb; }
+    #collections .collection .cover {
+      width: 48px;
+      height: 48px;
+      display: block;
+      float: left;
+      margin: 0 10px 0 0;
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      background-size: cover;
+      background-position: center;
+      background-image: url(http://raindrop.io/img/templates/diamond.png); }
+    #collections .collection .title {
+      font-weight: normal;
+      font-size: 14px;
+      margin: 5px 0 0 0; }
+    #collections .collection .count {
+      display: inline-block;
+      color: #9e9e9e;
+      font-size: 12px; }
+
+#raindrops {
+  height: 100%;
+  overflow: auto;
+  background: white; }
+  #raindrops .raindrop {
+    min-height: 60px;
+    overflow: hidden;
+    padding: 7px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #e7e7e7; }
+    #raindrops .raindrop:first-child {
+      padding-top: 10px; }
+    #raindrops .raindrop:last-child {
+      padding-bottom: 10px;
+      border-bottom: none; }
+    #raindrops .raindrop .cover {
+      float: left;
+      display: block;
+      width: 85px;
+      height: 60px;
+      margin: 0 10px 0 0;
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      background-size: cover;
+      background-position: center;
+      background-image: url(http://raindrop.io/img/v3/no-raindrops.png); }
+    #raindrops .raindrop .title {
+      margin: 2px 0 0 0;
+      padding: 0;
+      font-size: 14px;
+      font-weight: normal; }
+    #raindrops .raindrop .info {
+      color: #9e9e9e;
+      font-size: 12px;
+      margin: 3px 0 6px 0;
+      padding: 0 0 0 16px;
+      background-repeat: no-repeat;
+      background-position: left;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAABIAAAASABGyWs+AAABJ0lEQVQY0wXBsUsCURwH8O/vvafpgZhHV1IenoSISbRkNEk5h1QkCEG0uTb0hwRNDkItLbe1tElDQ6UtDQ1GcCBqemYcBVZ33uvzoWWChBarxsp/RhQTq286NWYHiULQV2YvMvkSxtCQxRVum91j+4Wr8bS5v848UIGSSMutqaMPN7+uuX5SPtxzGwGPWshggV6Z5SqJgSMWKweyJQR+UMQagCiWhC/jFaHqKRrBwi4MMPiIo0MzmNMZwUUeWfTgwAWDjxQMuGDjTlv6cgch1HGGBzCUZFKOOjysBosFz+UKbvCOZ0yQ82r8/pyr7d52JLHqKeTQAGFZmTYCl0/2KRffo7u3ja4+TxoekaMmqze7R58W5agvI5pSTZSF8QtYQ/OjJmyF/gGGhWsUAfWJaAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNC0wMi0xMlQwMzo1MDozNy0wNTowMDRYztAAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTQtMDItMTJUMDM6NTA6MzctMDU6MDBFBXZsAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAABJRU5ErkJggg==); }
+      #raindrops .raindrop .info:hover {
+        text-decoration: underline; }
+    #raindrops .raindrop .description {
+      color: #9e9e9e;
+      font-size: 12px;
+      line-height: 14px; }
