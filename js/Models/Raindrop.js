@@ -18,7 +18,7 @@ define(['config'], function(config) {
     this._description = description || '';
     this._domain = domain || '';
     this._link = link || '';
-    this._cover = cover ? config.formatImageLink(cover) : null;
+    this._cover = config.formatLink(cover);
     this._rendered = null;
   }
 

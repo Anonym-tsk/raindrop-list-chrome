@@ -1,4 +1,4 @@
-define(function() {
+define(['config'], function(config) {
   'use strict';
 
   /**
@@ -52,7 +52,7 @@ define(function() {
       }
       this._onSuccess(response['items']);
     }.bind(this);
-    xhr.open(this._method, this._url, true);
+    xhr.open(this._method, config.formatLink(this._url), true);
     xhr.send(this._data);
   };
 

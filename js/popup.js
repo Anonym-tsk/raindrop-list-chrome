@@ -18,12 +18,12 @@ require(['domReady', 'config', 'Models/Collection', 'Models/Request'], function(
 
   domReady(function() {
     // Get collections list
-    var request = new Request('GET', config.baseURI + '/api/collections');
+    var request = new Request('GET', '/api/collections');
     request.onSuccess(function(items) {
       var $container = document.querySelector('#collections');
       $container.innerHTML = '';
       items.forEach(function(item, index) {
-        var collection = new Collection(item['_id'], item['title'], item['count'], item['cover'] ? config.baseURI + item['cover'][0] : null, item['public']);
+        var collection = new Collection(item['_id'], item['title'], item['count'], item['cover'] ? config.formatLink(item['cover'][0]) : null, item['public']);
         collection.onClick(collectionClickHandler);
         $container.appendChild(collection.render());
         if (!index) {

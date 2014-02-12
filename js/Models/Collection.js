@@ -14,7 +14,7 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
     this._raindrops = [];
     this._id = +id;
     this._title = title || '';
-    this._cover = cover ? config.formatImageLink(cover) : null;
+    this._cover = config.formatLink(cover);
     this._count = count || this._raindrops.length;
     this._isPublic = !!isPublic;
     this._onClick = null;
@@ -39,7 +39,7 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
       return;
     }
 
-    var request = new Request('GET', config.baseURI + '/api/raindrops/' + this._id);
+    var request = new Request('GET', '/api/raindrops/' + this._id);
     request.onSuccess(function(items) {
       for (var i = 0, l = items.length; i < l; i++) {
         var item = items[i];
