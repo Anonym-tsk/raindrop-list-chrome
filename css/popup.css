@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body {
   width: 640px;
   height: 400px; }
@@ -58,6 +59,11 @@ h1, h2, h3 {
     cursor: pointer; }
     #collections .collection:hover {
       background-color: #ebebeb; }
+    #collections .collection.active {
+      background: #3797d9;
+      color: white; }
+      #collections .collection.active .count {
+        color: white; }
     #collections .collection .cover {
       width: 48px;
       height: 48px;
@@ -82,6 +88,16 @@ h1, h2, h3 {
   height: 100%;
   overflow: auto;
   background: white; }
+  #raindrops.empty:after {
+    content: "Коллекция пуста";
+    color: #cccccc;
+    display: block;
+    background: url(http://raindrop.io/img/v3/no-raindrops.png) no-repeat center 110px;
+    width: 100%;
+    height: auto;
+    padding-top: 210px;
+    text-align: center;
+    font-size: 30px; }
   #raindrops .raindrop {
     min-height: 60px;
     overflow: hidden;

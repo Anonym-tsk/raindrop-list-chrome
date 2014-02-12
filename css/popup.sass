@@ -60,6 +60,11 @@ $collection-image-size: 48px
     cursor: pointer
     &:hover
       background-color: #ebebeb
+    &.active
+      background: #3797d9
+      color: #fff
+      .count
+        color: #fff
     .cover
       width: $collection-image-size
       height: $collection-image-size
@@ -85,6 +90,16 @@ $raindrop-image-size: 60px
   height: 100%
   overflow: auto
   background: #fff
+  &.empty:after
+    content: 'Коллекция пуста'
+    color: #ccc
+    display: block
+    background: url(http://raindrop.io/img/v3/no-raindrops.png) no-repeat center 110px
+    width: 100%
+    height: auto
+    padding-top: 210px
+    text-align: center
+    font-size: 30px
   .raindrop
     min-height: $raindrop-image-size
     overflow: hidden

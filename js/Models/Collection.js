@@ -51,6 +51,7 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
       console.error(arguments);
     });
     request.execute();
+    // TODO: Показать загрузчик при старте, спрятать при финише
   };
 
   /**

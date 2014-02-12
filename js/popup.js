@@ -6,10 +6,19 @@ require(['domReady', 'config', 'Models/Collection', 'Models/Request'], function(
   };
 
   var collectionClickHandler = function() {
+    var active = document.querySelector('.collection.active');
+    if (this._rendered == active) return;
+    active && active.classList.remove('active');
+    this._rendered.classList.add('active');
+
     this.getItems(function(items) {
       var $container = document.querySelector('#raindrops');
+      $container.classList.remove('empty');
       $container.innerHTML = '';
-      items.forEach(function(raindrop) {
+      if (!items.length) {
+        $container.classList.add('empty');
+      }
+      else items.forEach(function(raindrop) {
         raindrop.onClick(raindropClickHandler);
         $container.appendChild(raindrop.render());
       });
@@ -35,5 +44,6 @@ require(['domReady', 'config', 'Models/Collection', 'Models/Request'], function(
       console.error(arguments);
     });
     request.execute();
+    // TODO: Показать загрузчик при старте, спрятать при финише
   });
 });
