@@ -52,8 +52,8 @@ h1, h2, h3 {
   height: 100%;
   overflow: auto; }
   #collections .collection {
-    min-height: 48px;
-    padding: 7px 10px;
+    min-height: 36px;
+    padding: 8px 10px;
     -webkit-transition: all 0.1s linear;
     transition: all 0.1s linear;
     cursor: pointer; }
@@ -65,8 +65,8 @@ h1, h2, h3 {
       #collections .collection.active .count {
         color: white; }
     #collections .collection .cover {
-      width: 48px;
-      height: 48px;
+      width: 36px;
+      height: 36px;
       display: block;
       float: left;
       margin: 0 10px 0 0;
@@ -78,7 +78,7 @@ h1, h2, h3 {
     #collections .collection .title {
       font-weight: normal;
       font-size: 14px;
-      margin: 5px 0 0 0; }
+      margin: 1px 0 0 0; }
     #collections .collection .count {
       display: inline-block;
       color: #9e9e9e;
