@@ -11,13 +11,45 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
    * @constructor
    */
   function Collection(id, title, count, cover, isPublic) {
+    /**
+     * @type {Array}
+     * @private
+     */
     this._raindrops = [];
+    /**
+     * @type {number}
+     * @private
+     */
     this._id = +id;
+    /**
+     * @type {string}
+     * @private
+     */
     this._title = title || '';
+    /**
+     * @type {?string}
+     * @private
+     */
     this._cover = config.formatLink(cover);
+    /**
+     * @type {number}
+     * @private
+     */
     this._count = count || this._raindrops.length;
+    /**
+     * @type {boolean}
+     * @private
+     */
     this._isPublic = !!isPublic;
+    /**
+     * @type {?function}
+     * @private
+     */
     this._onClick = null;
+    /**
+     * @type {?HTMLElement}
+     * @private
+     */
     this._rendered = null;
   }
 
@@ -59,40 +91,42 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
    * @return {HTMLElement}
    */
   Collection.prototype.render = function() {
-    if (!this._rendered) {
-      var $item = document.createElement('li');
-      $item.classList.add('collection');
-
-      var $image = document.createElement('div');
-      $image.classList.add('cover');
-      if (this._cover) {
-        $image.style.backgroundImage = 'url(' + this._cover + ')';
-      }
-
-      var $title = document.createElement('h3');
-      $title.classList.add('title');
-      $title.classList.add('nowrap');
-      $title.textContent = this._title;
-      $title.title = this._title;
-
-      var $count = document.createElement('div');
-      $count.classList.add('count');
-      if (this._isPublic) {
-        $count.classList.add('public');
-      }
-      $count.textContent = this._count + ' ' + config.formatNumericString(this._count, 'элемент', 'элемента', 'элементов');
-
-      $item.appendChild($image);
-      $item.appendChild($title);
-      $item.appendChild($count);
-
-      $item.addEventListener('click', function(e) {
-        e.preventDefault();
-        this._onClick();
-      }.bind(this), false);
-
-      this._rendered = $item;
+    if (this._rendered !== null) {
+      return this._rendered;
     }
+
+    var $item = document.createElement('li');
+    $item.classList.add('collection');
+
+    var $image = document.createElement('div');
+    $image.classList.add('cover');
+    if (this._cover) {
+      $image.style.backgroundImage = 'url(' + this._cover + ')';
+    }
+
+    var $title = document.createElement('h3');
+    $title.classList.add('title');
+    $title.classList.add('nowrap');
+    $title.textContent = this._title;
+    $title.title = this._title;
+
+    var $count = document.createElement('div');
+    $count.classList.add('count');
+    if (this._isPublic) {
+      $count.classList.add('public');
+    }
+    $count.textContent = this._count + ' ' + config.formatNumericString(this._count, 'элемент', 'элемента', 'элементов');
+
+    $item.appendChild($image);
+    $item.appendChild($title);
+    $item.appendChild($count);
+
+    $item.addEventListener('click', function(e) {
+      e.preventDefault();
+      this._onClick();
+    }.bind(this), false);
+
+    this._rendered = $item;
     return this._rendered;
   };
 

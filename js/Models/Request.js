@@ -3,16 +3,36 @@ define(['config'], function(config) {
 
   /**
    * AJAX Request class
-   * @param {string} method
+   * @param {'GET'|'POST'|'PUT'|'DELETE'|'OPTIONS'|'PATCH'} method
    * @param {string} url
-   * @param {*} data
+   * @param {Object|Array=} data
    * @constructor
    */
   function Request(method, url, data) {
+    /**
+     * @type {'GET'|'POST'|'PUT'|'DELETE'|'OPTIONS'|'PATCH'}
+     * @private
+     */
     this._method = method;
+    /**
+     * @type {string}
+     * @private
+     */
     this._url = url;
+    /**
+     * @type {?Object|Array}
+     * @private
+     */
     this._data = data || null;
+    /**
+     * @type {?function}
+     * @private
+     */
     this._onSuccess = null;
+    /**
+     * @type {?function}
+     * @private
+     */
     this._onError = null;
   }
 
