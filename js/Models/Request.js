@@ -37,7 +37,7 @@ define(['config'], function(config) {
    */
   Request.prototype.execute = function() {
     var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = (function() {
       if (xhr.readyState != 4) {
         return;
       }
@@ -51,7 +51,7 @@ define(['config'], function(config) {
         return;
       }
       this._onSuccess(response['items']);
-    }.bind(this);
+    }).bind(this);
     xhr.open(this._method, config.formatLink(this._url), true);
     xhr.send(this._data);
   };

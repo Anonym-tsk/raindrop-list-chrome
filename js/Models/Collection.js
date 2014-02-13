@@ -56,7 +56,7 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
 
   /**
    * Render collection
-   * @returns {HTMLElement}
+   * @return {HTMLElement}
    */
   Collection.prototype.render = function() {
     if (!this._rendered) {

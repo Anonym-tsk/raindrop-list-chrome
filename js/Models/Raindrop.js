@@ -32,7 +32,7 @@ define(['config'], function(config) {
 
   /**
    * Render raindrop
-   * @returns {HTMLElement}
+   * @return {HTMLElement}
    */
   Raindrop.prototype.render = function() {
     if (!this._rendered) {
