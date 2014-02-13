@@ -5,7 +5,7 @@ define(['config'], function(config) {
    * AJAX Request class
    * @param {'GET'|'POST'|'PUT'|'DELETE'|'OPTIONS'|'PATCH'} method
    * @param {string} url
-   * @param {Object|Array=} data
+   * @param {String|ArrayBuffer|Blob|HTMLDocument|FormData=} data
    * @constructor
    */
   function Request(method, url, data) {
@@ -20,7 +20,7 @@ define(['config'], function(config) {
      */
     this._url = url;
     /**
-     * @type {?Object|Array}
+     * @type {?String|ArrayBuffer|Blob|HTMLDocument|FormData}
      * @private
      */
     this._data = data || null;
@@ -66,6 +66,11 @@ define(['config'], function(config) {
         return;
       }
       var response = JSON.parse(xhr.responseText);
+      document.body.classList.remove('auth');
+      if (response.hasOwnProperty('auth') && !response['auth']) {
+        document.body.classList.add('auth');
+        return;
+      }
       if (!response['result']) {
         this._onError(xhr, response);
         return;

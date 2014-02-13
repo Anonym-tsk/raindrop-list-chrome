@@ -26,6 +26,11 @@ require(['domReady', 'config', 'Models/Collection', 'Models/Request'], function(
   };
 
   domReady(function() {
+    // Auth button
+    document.querySelector('#login').addEventListener('click', function() {
+      chrome.tabs.create({url: config.formatLink('/account')});
+    }, false);
+
     // Get collections list
     var request = new Request('GET', '/api/collections');
     request.onSuccess(function(items) {
