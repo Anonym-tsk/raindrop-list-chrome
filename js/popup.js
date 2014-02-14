@@ -28,7 +28,7 @@ require(['domReady', 'config', 'Models/Collection', 'Models/Request'], function(
 
     // Get collections list
     var request = new Request('GET', '/api/collections');
-    request.onSuccess(function(items) {
+    request.onSuccess = function(items) {
       var $container = document.querySelector('#collections');
       $container.innerHTML = '';
       items.forEach(function(item, index) {
@@ -39,10 +39,7 @@ require(['domReady', 'config', 'Models/Collection', 'Models/Request'], function(
           collection.onClick.call(collection);
         }
       });
-    });
-    request.onError(function() {
-      console.error(arguments);
-    });
+    };
     request.execute();
     // TODO: Показать загрузчик при старте, спрятать при финише
   });

@@ -64,16 +64,13 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
     }
 
     var request = new Request('GET', '/api/raindrops/' + this._id);
-    request.onSuccess(function(items) {
+    request.onSuccess = (function(items) {
       for (var i = 0, l = items.length; i < l; i++) {
         var item = items[i];
         this._raindrops.push(new Raindrop(item['_id'], item['title'], item['excerpt'], item['domain'], item['link'], item['cover']));
       }
       callback.call(this, this._raindrops);
-    }.bind(this));
-    request.onError(function() {
-      console.error(arguments);
-    });
+    }).bind(this);
     request.execute();
     // TODO: Показать загрузчик при старте, спрятать при финише
   };

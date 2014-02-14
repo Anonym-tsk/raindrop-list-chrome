@@ -6,9 +6,10 @@ define(['config'], function(config) {
    * @param {'GET'|'POST'|'PUT'|'DELETE'|'OPTIONS'|'PATCH'} method
    * @param {string} url
    * @param {String|ArrayBuffer|Blob|HTMLDocument|FormData=} data
+   * @param {number=} timeout
    * @constructor
    */
-  function Request(method, url, data) {
+  function Request(method, url, data, timeout) {
     /**
      * @type {'GET'|'POST'|'PUT'|'DELETE'|'OPTIONS'|'PATCH'}
      * @private
@@ -25,31 +26,23 @@ define(['config'], function(config) {
      */
     this._data = data || null;
     /**
-     * @type {?function}
+     * @type {number}
      * @private
      */
-    this._onSuccess = null;
-    /**
-     * @type {?function}
-     * @private
-     */
-    this._onError = null;
+    this._timeout = +timeout || 5000;
   }
 
   /**
-   * Set success callback
-   * @param {function} callback
+   * Success handler
+   * @param {*} args
    */
-  Request.prototype.onSuccess = function(callback) {
-    this._onSuccess = callback;
-  };
+  Request.prototype.onSuccess = function(args) {};
 
   /**
-   * Set error callback
-   * @param {function} callback
+   * Error handler
    */
-  Request.prototype.onError = function(callback) {
-    this._onError = callback;
+  Request.prototype.onError = function() {
+    console.error(arguments);
   };
 
   /**
@@ -57,12 +50,14 @@ define(['config'], function(config) {
    */
   Request.prototype.execute = function() {
     var xhr = new XMLHttpRequest();
+    var xhrTimeout = null;
     xhr.onreadystatechange = (function() {
       if (xhr.readyState != 4) {
         return;
       }
+      clearTimeout(xhrTimeout);
       if (xhr.status != 200 || !xhr.responseText) {
-        this._onError(xhr);
+        this.onError(xhr);
         return;
       }
       var response = JSON.parse(xhr.responseText);
@@ -72,13 +67,14 @@ define(['config'], function(config) {
         return;
       }
       if (!response['result']) {
-        this._onError(xhr, response);
+        this.onError(xhr, response);
         return;
       }
-      this._onSuccess(response['items']);
+      this.onSuccess(response['items']);
     }).bind(this);
     xhr.open(this._method, config.formatLink(this._url), true);
     xhr.send(this._data);
+    xhrTimeout = setTimeout(this.onError.bind(this), this._timeout);
   };
 
   return Request;
