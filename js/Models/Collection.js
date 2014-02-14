@@ -42,11 +42,6 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
      */
     this._isPublic = !!isPublic;
     /**
-     * @type {?function}
-     * @private
-     */
-    this._onClick = null;
-    /**
      * @type {?HTMLElement}
      * @private
      */
@@ -54,12 +49,9 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
   }
 
   /**
-   * Set onclick callback
-   * @param {function} callback
+   * Onclick method
    */
-  Collection.prototype.onClick = function(callback) {
-    this._onClick = callback;
-  };
+  Collection.prototype.onClick = function() {};
 
   /**
    * Get raindrops
@@ -123,7 +115,7 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
 
     $item.addEventListener('click', function(e) {
       e.preventDefault();
-      this._onClick();
+      this.onClick();
     }.bind(this), false);
 
     this._rendered = $item;

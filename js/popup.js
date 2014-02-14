@@ -1,7 +1,7 @@
 require(['domReady', 'config', 'Models/Collection', 'Models/Request'], function(domReady, config, Collection, Request) {
   'use strict';
 
-  var collectionClickHandler = function() {
+  Collection.prototype.onClick = function() {
     var active = document.querySelector('.collection.active');
     if (this._rendered == active) return;
     active && active.classList.remove('active');
@@ -33,10 +33,10 @@ require(['domReady', 'config', 'Models/Collection', 'Models/Request'], function(
       $container.innerHTML = '';
       items.forEach(function(item, index) {
         var collection = new Collection(item['_id'], item['title'], item['count'], item['cover'] ? config.formatLink(item['cover'][0]) : null, item['public']);
-        collection.onClick(collectionClickHandler);
         $container.appendChild(collection.render());
         if (!index) {
-          collectionClickHandler.call(collection);
+          // TODO: Сохранять текущую коллекцию и показывать при открытии её
+          collection.onClick.call(collection);
         }
       });
     });
