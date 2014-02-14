@@ -51,30 +51,41 @@ define(['config'], function(config) {
   Request.prototype.execute = function() {
     var xhr = new XMLHttpRequest();
     var xhrTimeout = null;
+
+    document.body.classList.add('loading');
+    document.body.classList.remove('error');
+    document.body.classList.remove('auth');
+
     xhr.onreadystatechange = (function() {
-      if (xhr.readyState != 4) {
-        return;
-      }
+      if (xhr.readyState != 4) return;
+
       clearTimeout(xhrTimeout);
+      document.body.classList.remove('loading');
+
       if (xhr.status != 200 || !xhr.responseText) {
+        document.body.classList.add('error');
         this.onError(xhr);
         return;
       }
+
       var response = JSON.parse(xhr.responseText);
-      document.body.classList.remove('auth');
       if (response.hasOwnProperty('auth') && !response['auth']) {
         document.body.classList.add('auth');
         return;
       }
+
       if (!response['result']) {
+        document.body.classList.add('error');
         this.onError(xhr, response);
         return;
       }
+
       this.onSuccess(response['items']);
     }).bind(this);
+
     xhr.open(this._method, config.formatLink(this._url), true);
     xhr.send(this._data);
-    xhrTimeout = setTimeout(this.onError.bind(this), this._timeout);
+    xhrTimeout = setTimeout(xhr.abort.bind(xhr), this._timeout);
   };
 
   return Request;
