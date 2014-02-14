@@ -203,3 +203,14 @@ body.auth {
 
 body.loading #loader {
   display: block; }
+
+body.error #raindrops:after {
+  content: "Ошибка соединения";
+  color: #cccccc;
+  display: block;
+  background: url(http://raindrop.io/img/v3/no-raindrops.png) no-repeat center 110px;
+  width: 100%;
+  height: auto;
+  padding-top: 210px;
+  text-align: center;
+  font-size: 30px; }
