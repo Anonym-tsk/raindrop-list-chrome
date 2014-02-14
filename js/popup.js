@@ -1,10 +1,6 @@
 require(['domReady', 'config', 'Models/Collection', 'Models/Request'], function(domReady, config, Collection, Request) {
   'use strict';
 
-  var raindropClickHandler = function() {
-    chrome.tabs.create({url: this._link});
-  };
-
   var collectionClickHandler = function() {
     var active = document.querySelector('.collection.active');
     if (this._rendered == active) return;
@@ -19,7 +15,6 @@ require(['domReady', 'config', 'Models/Collection', 'Models/Request'], function(
         $container.classList.add('empty');
       }
       else items.forEach(function(raindrop) {
-        raindrop.onClick(raindropClickHandler);
         $container.appendChild(raindrop.render());
       });
     });

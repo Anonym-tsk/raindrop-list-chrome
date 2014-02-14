@@ -43,11 +43,6 @@ define(['config'], function(config) {
      */
     this._cover = config.formatLink(cover);
     /**
-     * @type {?function}
-     * @private
-     */
-    this._onClick = null;
-    /**
      * @type {?HTMLElement}
      * @private
      */
@@ -55,11 +50,10 @@ define(['config'], function(config) {
   }
 
   /**
-   * Set onclick callback
-   * @param {function} callback
+   * Onclick method
    */
-  Raindrop.prototype.onClick = function(callback) {
-    this._onClick = callback;
+  Raindrop.prototype.onClick = function() {
+    chrome.tabs.create({url: this._link});
   };
 
   /**
@@ -104,7 +98,7 @@ define(['config'], function(config) {
 
     $item.addEventListener('click', function(e) {
       e.preventDefault();
-      this._onClick();
+      this.onClick();
     }.bind(this), false);
 
     this._rendered = $item;
