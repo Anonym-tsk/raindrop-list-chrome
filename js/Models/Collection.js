@@ -54,7 +54,7 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
   Collection.prototype.onClick = function() {};
 
   /**
-   * Get raindrops
+   * Get all loaded raindrops
    * @param {function} callback
    */
   Collection.prototype.getItems = function(callback) {
@@ -62,17 +62,29 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
       callback.call(this, this._raindrops);
       return;
     }
+    this.getNextItems(callback);
+  };
 
-    var request = new Request('GET', '/api/raindrops/' + this._id);
-    request.onSuccess = (function(items) {
-      for (var i = 0, l = items.length; i < l; i++) {
-        var item = items[i];
-        this._raindrops.push(new Raindrop(item['_id'], item['title'], item['excerpt'], item['domain'], item['link'], item['cover']));
-      }
-      callback.call(this, this._raindrops);
-    }).bind(this);
-    request.execute();
-    // TODO: Показать загрузчик при старте, спрятать при финише
+  /**
+   * Get raindrops for next page
+   * @param {function} callback
+   */
+  Collection.prototype.getNextItems = function(callback) {
+    if (this._raindrops.length < this._count) {
+      var page = Math.floor(this._raindrops.length / 20);
+      var request = new Request('GET', '/api/raindrops/' + this._id + '?page=' + page);
+      request.onSuccess = (function(items) {
+        var chunk = [];
+        for (var i = 0, l = items.length; i < l; i++) {
+          var item = items[i];
+          var raindrop = new Raindrop(item['_id'], item['title'], item['excerpt'], item['domain'], item['link'], item['cover']);
+          chunk.push(raindrop);
+          this._raindrops.push(raindrop);
+        }
+        callback.call(this, chunk);
+      }).bind(this);
+      request.execute();
+    }
   };
 
   /**

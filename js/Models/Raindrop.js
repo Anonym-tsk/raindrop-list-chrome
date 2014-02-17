@@ -52,9 +52,7 @@ define(['config'], function(config) {
   /**
    * Onclick method
    */
-  Raindrop.prototype.onClick = function() {
-    chrome.tabs.create({url: this._link});
-  };
+  Raindrop.prototype.onClick = function() {};
 
   /**
    * Render raindrop
