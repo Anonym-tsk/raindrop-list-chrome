@@ -2,18 +2,13 @@
   "manifest_version": 2,
 
   "default_locale": "en",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "name": "__MSG_name__",
   "description": "__MSG_description__",
   "permissions": [
     "storage",
     "http://raindrop.io/*"
   ],
-  "background": {
-    "scripts": [
-      "js/background.js"
-    ]
-  },
   "browser_action": {
     "default_icon": {
       "38": "icons/38.png",
