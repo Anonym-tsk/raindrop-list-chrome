@@ -6,6 +6,7 @@
   "name": "__MSG_name__",
   "description": "__MSG_description__",
   "permissions": [
+    "storage",
     "http://raindrop.io/*"
   ],
   "background": {

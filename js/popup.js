@@ -35,6 +35,7 @@ require(['config', 'Models/Collection', 'Models/Raindrop', 'Models/Request', 'do
       return;
     }
 
+    chrome.storage.local.set({current: this._id});
     currentCollection = this;
     $raindrops.scrollTop = 0;
     $raindrops.innerHTML = '';
@@ -58,13 +59,16 @@ require(['config', 'Models/Collection', 'Models/Raindrop', 'Models/Request', 'do
   var request = new Request('GET', '/api/collections');
   request.onSuccess = function(items) {
     $collections.innerHTML = '';
-    items.forEach(function(item, index) {
-      var collection = new Collection(item['_id'], item['title'], item['count'], item['cover'] ? config.formatLink(item['cover'][0]) : null, item['public']);
-      $collections.appendChild(collection.render());
-      if (!index) {
-        // TODO: Сохранять текущую коллекцию и показывать при открытии её
-        collection.onClick.call(collection);
-      }
+    var collectionToShow;
+    chrome.storage.local.get('current', function(storage) {
+      items.forEach(function(item, index) {
+        var collection = new Collection(item['_id'], item['title'], item['count'], item['cover'] ? config.formatLink(item['cover'][0]) : null, item['public']);
+        $collections.appendChild(collection.render());
+        if (!index || item['_id'] == storage.current) {
+          collectionToShow = collection;
+        }
+      });
+      collectionToShow.onClick.call(collectionToShow);
     });
   };
   request.execute();
