@@ -4,5 +4,21 @@
   },
   "description": {
     "message": "Your smart bookmarks. A beautiful way to remember the most important thing."
+  },
+
+  "please_login": {
+    "message": "Please login to start save bookmarks"
+  },
+  "login": {
+    "message": "Login"
+  },
+  "element1": {
+    "message": "$1 element"
+  },
+  "element3": {
+    "message": "$1 elements"
+  },
+  "element5": {
+    "message": "$1 elements"
   }
 }

@@ -89,7 +89,7 @@ $raindrop-image-size: 60px
   overflow: auto
   background: #fff
   &.empty:after
-    content: 'Коллекция пуста'
+    content: attr(data-empty)
     color: #ccc
     display: block
     background-position: center 110px
@@ -209,7 +209,7 @@ body.loading
 
 body.error
   #raindrops:after
-    content: 'Ошибка соединения'
+    content: attr(data-error)
     color: #ccc
     display: block
     background-position: center 110px

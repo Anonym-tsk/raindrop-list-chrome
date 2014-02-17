@@ -116,7 +116,7 @@ define(['config', 'Models/Request', 'Models/Raindrop'], function(config, Request
     if (this._isPublic) {
       $count.classList.add('public');
     }
-    $count.textContent = this._count + ' ' + config.formatNumericString(this._count, 'элемент', 'элемента', 'элементов');
+    $count.textContent = config.formatNumericString(this._count, 'element1', 'element3', 'element5');
 
     $item.appendChild($image);
     $item.appendChild($title);

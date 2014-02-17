@@ -6,6 +6,35 @@ require(['config', 'Models/Collection', 'Models/Raindrop', 'Models/Request', 'do
 
   var currentCollection = null;
 
+  // Translations
+  var translateNodes = document.querySelectorAll('[data-i18n]');
+  for (var i = 0, l = translateNodes.length; i < l; i++) {
+    var i18nName = translateNodes[i].dataset['i18n'];
+    translateNodes[i].textContent = chrome.i18n.getMessage(i18nName);
+  }
+//  var translateStatic = function() {
+//    $('[data-i18n]').each(function() {
+//      var $this = $(this);
+//      var i18nName = $this.data('i18n');
+//      $this.text(chrome.i18n.getMessage(i18nName));
+//    });
+//    $('[data-i18n-title]').each(function() {
+//      var $this = $(this);
+//      var i18nName = $this.data('i18n-title');
+//      $this.attr('title', chrome.i18n.getMessage(i18nName));
+//    });
+//    $('[data-i18n-placeholder]').each(function() {
+//      var $this = $(this);
+//      var i18nName = $this.data('i18n-placeholder');
+//      $this.attr('placeholder', chrome.i18n.getMessage(i18nName));
+//    });
+//    $('[data-i18n-value]').each(function() {
+//      var $this = $(this);
+//      var i18nName = $this.data('i18n-value');
+//      $this.attr('value', chrome.i18n.getMessage(i18nName));
+//    });
+//  };
+
   // Auth button
   document.querySelector('#login').addEventListener('click', function() {
     chrome.tabs.create({url: config.formatLink('/account')});
